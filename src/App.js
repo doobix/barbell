@@ -3,16 +3,74 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      availableWeights: [45, 25, 10, 5, 2.5],
+      barbellWeight: 45,
+      inputWeight: 0,
+      calculatedWeights: [],
+    };
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Barbell Weight Calculator</h1>
         </header>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          <input value={this.state.inputWeight} onChange={e => this.setWeight(e)} />
+          <button onClick={e => this.calculateWeights(e)}>Calculate!</button>
         </p>
+        {this.renderWeights()}
+      </div>
+    );
+  }
+
+  setWeight(e) {
+    this.setState({
+      inputWeight: e.target.value,
+    });
+  }
+
+  calculateWeights() {
+    const calculatedWeights = [];
+    let oneSideWeights = (this.state.inputWeight - this.state.barbellWeight) / 2;
+
+    this.state.availableWeights.forEach((weight) => {
+      let count = 0;
+      while (oneSideWeights - weight >= 0) {
+        oneSideWeights -= weight;
+        count++;
+      }
+      if (count) {
+        calculatedWeights.push({
+          weight,
+          count,
+        });
+      }
+    });
+
+    this.setState({
+      calculatedWeights,
+    });
+  }
+
+  renderWeights() {
+    if (this.state.calculatedWeights.length === 0) {
+      return null;
+    }
+
+    let weightElements = [];
+    this.state.calculatedWeights.forEach((weightObj) => {
+      weightElements.push(<div key={weightObj.weight}>{weightObj.count} x {weightObj.weight} lbs</div>);
+    });
+
+    return (
+      <div>
+        {weightElements}
       </div>
     );
   }
