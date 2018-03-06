@@ -70,6 +70,7 @@ class App extends Component {
 
     return (
       <div>
+        <p>Weights to add to each side of the barbell:</p>
         {weightElements}
       </div>
     );
