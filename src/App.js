@@ -8,7 +8,7 @@ class App extends Component {
     this.state = {
       availableWeights: [45, 25, 10, 5, 2.5],
       barbellWeight: 45,
-      inputWeight: 0,
+      inputWeight: 135,
       calculatedWeights: [],
     };
   }
