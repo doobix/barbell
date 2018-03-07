@@ -10,6 +10,7 @@ class App extends Component {
       barbellWeight: 45,
       inputWeight: 135,
       calculatedWeights: [],
+      leftoverWeight: 0,
     };
   }
 
@@ -55,6 +56,7 @@ class App extends Component {
 
     this.setState({
       calculatedWeights,
+      leftoverWeight: oneSideWeights * 2,
     });
   }
 
@@ -68,8 +70,14 @@ class App extends Component {
       weightElements.push(<div key={weightObj.weight}>{weightObj.count} x {weightObj.weight} lbs</div>);
     });
 
+    let leftoverWeightElement = null;
+    if (this.state.leftoverWeight) {
+      leftoverWeightElement = (<div>Notice: Unable to find weights to add {this.state.leftoverWeight} lbs to the barbell.</div>);
+    }
+
     return (
       <div>
+        {leftoverWeightElement}
         <p>Weights to add to each side of the barbell:</p>
         {weightElements}
       </div>
