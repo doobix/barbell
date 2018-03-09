@@ -18,8 +18,8 @@
   display: inline;
 }
 
-.App-intro {
-  font-size: large;
+.content {
+  margin: 20px;
 }
 
 @keyframes App-logo-spin {

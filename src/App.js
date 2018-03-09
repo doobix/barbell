@@ -21,11 +21,13 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Barbell Weight Calculator</h1>
         </header>
-        <form onSubmit={e => this.calculateWeights(e)}>
-          <input type="number" value={this.state.inputWeight} onChange={e => this.setWeight(e)} />
-          <button type="submit">Calculate!</button>
-        </form>
-        {this.renderWeights()}
+        <div className="content">
+          <form onSubmit={e => this.calculateWeights(e)}>
+            <input type="number" value={this.state.inputWeight} onChange={e => this.setWeight(e)} />
+            <button type="submit">Calculate!</button>
+          </form>
+          {this.renderWeights()}
+        </div>
       </div>
     );
   }
