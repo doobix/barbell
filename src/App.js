@@ -21,10 +21,10 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Barbell Weight Calculator</h1>
         </header>
-        <p className="App-intro">
+        <form onSubmit={e => this.calculateWeights(e)}>
           <input type="number" value={this.state.inputWeight} onChange={e => this.setWeight(e)} />
-          <button onClick={e => this.calculateWeights(e)}>Calculate!</button>
-        </p>
+          <button type="submit">Calculate!</button>
+        </form>
         {this.renderWeights()}
       </div>
     );
@@ -36,7 +36,10 @@ class App extends Component {
     });
   }
 
-  calculateWeights() {
+  calculateWeights(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
     const calculatedWeights = [];
     let oneSideWeights = (this.state.inputWeight - this.state.barbellWeight) / 2;
 
