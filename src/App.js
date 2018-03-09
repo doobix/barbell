@@ -22,7 +22,7 @@ class App extends Component {
           <h1 className="App-title">Barbell Weight Calculator</h1>
         </header>
         <p className="App-intro">
-          <input value={this.state.inputWeight} onChange={e => this.setWeight(e)} />
+          <input type="number" value={this.state.inputWeight} onChange={e => this.setWeight(e)} />
           <button onClick={e => this.calculateWeights(e)}>Calculate!</button>
         </p>
         {this.renderWeights()}
