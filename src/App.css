@@ -2,13 +2,8 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 .App-header {
-  background-color: #222;
+  background-color: #222222;
   padding: 20px;
   color: white;
 }
@@ -18,11 +13,22 @@
   display: inline;
 }
 
-.content {
-  margin: 20px;
+.content p {
+  margin: 0 0 10px 0;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.enter-weight {
+  padding: 20px;
+  background-color: #EEEEEE;
+}
+
+.weight-results {
+  padding: 20px;
+}
+
+.notice {
+  background-color: #FFFF88;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 10px;
 }

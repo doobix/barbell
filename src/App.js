@@ -20,11 +20,16 @@ class App extends Component {
           <h1 className="App-title">Barbell Weight Calculator</h1>
         </header>
         <div className="content">
-          <form onSubmit={e => this.calculateWeights(e)}>
-            <input type="number" value={this.state.inputWeight} onChange={e => this.setWeight(e)} />
-            <button type="submit">Calculate!</button>
-          </form>
-          {this.renderWeights()}
+          <div className="enter-weight">
+            <p>Enter target weight (lbs):</p>
+            <form onSubmit={e => this.calculateWeights(e)}>
+              <input type="number" value={this.state.inputWeight} onChange={e => this.setWeight(e)} />
+              <button type="submit">Calculate!</button>
+            </form>
+          </div>
+          <div className="weight-results">
+            {this.renderWeights()}
+          </div>
         </div>
       </div>
     );
@@ -75,7 +80,11 @@ class App extends Component {
 
     let leftoverWeightElement = null;
     if (this.state.leftoverWeight) {
-      leftoverWeightElement = (<div>Notice: Unable to find weights to add {this.state.leftoverWeight} lbs to the barbell.</div>);
+      leftoverWeightElement = (
+        <div className="notice">
+          Notice: Unable to find weights to add {this.state.leftoverWeight} lbs to the barbell.
+        </div>
+      );
     }
 
     return (
