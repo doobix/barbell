@@ -4,10 +4,13 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
+
+    let lastInputWeight = localStorage.getItem('lastInputWeight') || 310;
+
     this.state = {
       availableWeights: [45, 25, 10, 5, 2.5],
       barbellWeight: 45,
-      inputWeight: 135,
+      inputWeight: lastInputWeight,
       calculatedWeights: [],
       leftoverWeight: 0,
     };
@@ -66,6 +69,8 @@ class App extends Component {
       calculatedWeights,
       leftoverWeight: oneSideWeights * 2,
     });
+
+    localStorage.setItem('lastInputWeight', this.state.inputWeight);
   }
 
   renderWeights() {
