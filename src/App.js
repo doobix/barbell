@@ -16,6 +16,10 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    this.calculateWeights();
+  }
+
   render() {
     return (
       <div className="App">
@@ -25,7 +29,7 @@ class App extends Component {
         <div className="content">
           <div className="enter-weight">
             <p>Enter target weight (lbs):</p>
-            <form onSubmit={e => this.calculateWeights(e)}>
+            <form onSubmit={e => this.onCalculateClick(e)}>
               <input type="number" value={this.state.inputWeight} onChange={e => this.setWeight(e)} />
               <button type="submit">Calculate!</button>
             </form>
@@ -44,10 +48,13 @@ class App extends Component {
     });
   }
 
-  calculateWeights(event) {
+  onCalculateClick(event) {
     event.preventDefault();
     event.stopPropagation();
+    this.calculateWeights();
+  }
 
+  calculateWeights() {
     const calculatedWeights = [];
     let oneSideWeights = (this.state.inputWeight - this.state.barbellWeight) / 2;
 
@@ -75,7 +82,11 @@ class App extends Component {
 
   renderWeights() {
     if (this.state.calculatedWeights.length === 0) {
-      return null;
+      return (
+        <div className="notice">
+          Notice: Unable to make a barbell with the targeted weight.
+        </div>
+      );
     }
 
     let weightElements = [];
