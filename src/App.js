@@ -5,7 +5,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    let lastInputWeight = localStorage.getItem('lastInputWeight') || 310;
+    const lastInputWeight = localStorage.getItem('lastInputWeight') || 310;
 
     this.state = {
       availableWeights: [45, 25, 10, 5, 2.5],
