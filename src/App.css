@@ -14,16 +14,16 @@
 }
 
 .content p {
-  margin: 0 0 10px 0;
+  margin: 10px 0;
 }
 
 .enter-weight {
-  padding: 20px;
+  padding: 10px 20px;
   background-color: #EEEEEE;
 }
 
 .weight-results {
-  padding: 20px;
+  padding: 10px 20px;
 }
 
 .notice {
