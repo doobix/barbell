@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 
+const DEFAULT_WEIGHT = 310;
+
 class App extends Component {
   constructor(props) {
     super(props);
 
-    const lastInputWeight = localStorage.getItem('lastInputWeight') || 310;
+    const lastInputWeight = localStorage.getItem('lastInputWeight') || DEFAULT_WEIGHT;
 
     this.state = {
       availableWeights: [45, 25, 10, 5, 2.5],
