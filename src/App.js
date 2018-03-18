@@ -9,18 +9,18 @@ const DEFAULT_WEIGHT_MAP = {
   5: true,
   2.5: true,
 };
+const LAST_INPUT_WEIGHT = 'lastInputWeight';
+const LAST_WEIGHT_MAP = 'lastWeightMap';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    const lastInputWeight = localStorage.getItem('lastInputWeight') || DEFAULT_WEIGHT;
-
     this.state = {
       weights: [45, 25, 10, 5, 2.5],
-      weightMap: JSON.parse(localStorage.getItem('lastWeightMap')) || DEFAULT_WEIGHT_MAP,
+      weightMap: JSON.parse(localStorage.getItem(LAST_WEIGHT_MAP)) || DEFAULT_WEIGHT_MAP,
       barbellWeight: 45,
-      inputWeight: lastInputWeight,
+      inputWeight: localStorage.getItem(LAST_INPUT_WEIGHT) || DEFAULT_WEIGHT,
       calculatedWeights: [],
       leftoverWeight: 0,
     };
@@ -99,7 +99,7 @@ class App extends Component {
       leftoverWeight: oneSideWeights * 2,
     });
 
-    localStorage.setItem('lastInputWeight', this.state.inputWeight);
+    localStorage.setItem(LAST_INPUT_WEIGHT, this.state.inputWeight);
   }
 
   toggleWeightCheckbox(weight) {
@@ -108,7 +108,7 @@ class App extends Component {
       [weight]: !this.state.weightMap[weight],
     };
     this.setState({...this.state, weightMap});
-    localStorage.setItem('lastWeightMap', JSON.stringify(weightMap));
+    localStorage.setItem(LAST_WEIGHT_MAP, JSON.stringify(weightMap));
   }
 
   renderWeightCheckbox(weight) {
