@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 
 const DEFAULT_WEIGHT = 310;
+const DEFAULT_WEIGHT_MAP = {
+  45: true,
+  25: true,
+  10: true,
+  5: true,
+  2.5: true,
+};
 
 class App extends Component {
   constructor(props) {
@@ -11,13 +18,7 @@ class App extends Component {
 
     this.state = {
       weights: [45, 25, 10, 5, 2.5],
-      weightMap: {
-        45: true,
-        25: true,
-        10: true,
-        5: true,
-        2.5: true,
-      },
+      weightMap: JSON.parse(localStorage.getItem('lastWeightMap')) || DEFAULT_WEIGHT_MAP,
       barbellWeight: 45,
       inputWeight: lastInputWeight,
       calculatedWeights: [],
@@ -102,10 +103,12 @@ class App extends Component {
   }
 
   toggleWeightCheckbox(weight) {
-    this.setState({...this.state, weightMap: {
+    const weightMap = {
       ...this.state.weightMap,
       [weight]: !this.state.weightMap[weight],
-    }});
+    };
+    this.setState({...this.state, weightMap});
+    localStorage.setItem('lastWeightMap', JSON.stringify(weightMap));
   }
 
   renderWeightCheckbox(weight) {
