@@ -10,7 +10,14 @@ class App extends Component {
     const lastInputWeight = localStorage.getItem('lastInputWeight') || DEFAULT_WEIGHT;
 
     this.state = {
-      availableWeights: [45, 25, 10, 5, 2.5],
+      weights: [45, 25, 10, 5, 2.5],
+      weightMap: {
+        45: true,
+        25: true,
+        10: true,
+        5: true,
+        2.5: true,
+      },
       barbellWeight: 45,
       inputWeight: lastInputWeight,
       calculatedWeights: [],
@@ -35,6 +42,16 @@ class App extends Component {
               <input type="number" value={this.state.inputWeight} onChange={e => this.setWeight(e)} />
               <button type="submit">Calculate!</button>
             </form>
+            <div>
+              <p>Available plates:</p>
+              <ul className="available-weights">
+                {this.renderWeightCheckbox(45)}
+                {this.renderWeightCheckbox(25)}
+                {this.renderWeightCheckbox(10)}
+                {this.renderWeightCheckbox(5)}
+                {this.renderWeightCheckbox(2.5)}
+              </ul>
+            </div>
           </div>
           <div className="weight-results">
             {this.renderWeights()}
@@ -44,9 +61,9 @@ class App extends Component {
     );
   }
 
-  setWeight(e) {
+  setWeight(event) {
     this.setState({
-      inputWeight: e.target.value,
+      inputWeight: event.target.value,
     });
   }
 
@@ -60,17 +77,19 @@ class App extends Component {
     const calculatedWeights = [];
     let oneSideWeights = (this.state.inputWeight - this.state.barbellWeight) / 2;
 
-    this.state.availableWeights.forEach((weight) => {
-      let count = 0;
-      while (oneSideWeights - weight >= 0) {
-        oneSideWeights -= weight;
-        count++;
-      }
-      if (count) {
-        calculatedWeights.push({
-          weight,
-          count,
-        });
+    this.state.weights.forEach((weight) => {
+      if (this.state.weightMap[weight]) {
+        let count = 0;
+        while (oneSideWeights - weight >= 0) {
+          oneSideWeights -= weight;
+          count++;
+        }
+        if (count) {
+          calculatedWeights.push({
+            weight,
+            count,
+          });
+        }
       }
     });
 
@@ -80,6 +99,25 @@ class App extends Component {
     });
 
     localStorage.setItem('lastInputWeight', this.state.inputWeight);
+  }
+
+  toggleWeightCheckbox(weight) {
+    this.setState({...this.state, weightMap: {
+      ...this.state.weightMap,
+      [weight]: !this.state.weightMap[weight],
+    }});
+  }
+
+  renderWeightCheckbox(weight) {
+    return (
+      <li>
+        <input
+          type="checkbox"
+          checked={this.state.weightMap[weight]}
+          onChange={() => this.toggleWeightCheckbox(weight)}
+        /> {weight}
+      </li>
+    );
   }
 
   renderWeights() {
