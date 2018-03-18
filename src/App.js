@@ -107,8 +107,10 @@ class App extends Component {
       ...this.state.weightMap,
       [weight]: !this.state.weightMap[weight],
     };
-    this.setState({...this.state, weightMap});
-    localStorage.setItem(LAST_WEIGHT_MAP, JSON.stringify(weightMap));
+    this.setState({...this.state, weightMap}, () => {
+      localStorage.setItem(LAST_WEIGHT_MAP, JSON.stringify(this.state.weightMap));
+      this.calculateWeights();
+    });
   }
 
   renderWeightCheckbox(weight) {
