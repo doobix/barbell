@@ -40,7 +40,7 @@ class App extends Component {
           <div className="enter-weight">
             <p>Enter target weight (lbs):</p>
             <form onSubmit={e => this.onCalculateClick(e)}>
-              <input type="number" value={this.state.inputWeight} onChange={e => this.setWeight(e)} />
+              <input className="input-weight" type="number" value={this.state.inputWeight} onChange={e => this.setWeight(e)} />
               <button type="submit">Calculate!</button>
             </form>
             <div>
@@ -116,11 +116,13 @@ class App extends Component {
   renderWeightCheckbox(weight) {
     return (
       <li>
-        <input
-          type="checkbox"
-          checked={this.state.weightMap[weight]}
-          onChange={() => this.toggleWeightCheckbox(weight)}
-        /> {weight}
+        <label>
+          <input
+            type="checkbox"
+            checked={this.state.weightMap[weight]}
+            onChange={() => this.toggleWeightCheckbox(weight)}
+          /> {weight}
+        </label>
       </li>
     );
   }

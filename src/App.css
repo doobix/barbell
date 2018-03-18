@@ -22,6 +22,15 @@
   background-color: #EEEEEE;
 }
 
+.enter-weight button,
+.enter-weight input {
+  font-size: 16px;
+}
+
+.input-weight {
+  width: 50px;
+}
+
 .weight-results {
   padding: 10px 20px;
 }
