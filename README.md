@@ -4,7 +4,7 @@ A quick and easy way to find out which plates you need to add to your barbell!
 
 ## Live demo
 
-[https://barbell.netlify.com](https://barbell.netlify.com)
+[http://barbell.seewes.com](http://barbell.seewes.com)
 
 ## Development
 
