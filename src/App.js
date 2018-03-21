@@ -4,6 +4,7 @@ import './App.css';
 const DEFAULT_WEIGHT = 310;
 const DEFAULT_WEIGHT_MAP = {
   45: true,
+  35: false,
   25: true,
   10: true,
   5: true,
@@ -17,7 +18,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      weights: [45, 25, 10, 5, 2.5],
+      weights: [45, 35, 25, 10, 5, 2.5],
       weightMap: JSON.parse(localStorage.getItem(LAST_WEIGHT_MAP)) || DEFAULT_WEIGHT_MAP,
       barbellWeight: 45,
       inputWeight: localStorage.getItem(LAST_INPUT_WEIGHT) || DEFAULT_WEIGHT,
@@ -46,11 +47,7 @@ class App extends Component {
             <div>
               <p>Available plates:</p>
               <ul className="available-weights">
-                {this.renderWeightCheckbox(45)}
-                {this.renderWeightCheckbox(25)}
-                {this.renderWeightCheckbox(10)}
-                {this.renderWeightCheckbox(5)}
-                {this.renderWeightCheckbox(2.5)}
+                {this.renderWeightCheckboxes()}
               </ul>
             </div>
           </div>
@@ -113,18 +110,22 @@ class App extends Component {
     });
   }
 
-  renderWeightCheckbox(weight) {
-    return (
-      <li>
-        <label>
-          <input
-            type="checkbox"
-            checked={this.state.weightMap[weight]}
-            onChange={() => this.toggleWeightCheckbox(weight)}
-          /> {weight}
-        </label>
-      </li>
-    );
+  renderWeightCheckboxes() {
+    const weightCheckboxes = [];
+    this.state.weights.forEach((weight) => {
+      weightCheckboxes.push(
+        <li key={weight}>
+          <label>
+            <input
+              type="checkbox"
+              checked={this.state.weightMap[weight]}
+              onChange={() => this.toggleWeightCheckbox(weight)}
+            /> {weight}
+          </label>
+        </li>
+      );
+    });
+    return weightCheckboxes;
   }
 
   renderWeights() {
