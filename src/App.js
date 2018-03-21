@@ -40,17 +40,24 @@ class App extends Component {
         </header>
         <div className="content">
           <div className="enter-weight">
-            <p>Enter target weight (lbs):</p>
-            <form onSubmit={e => this.onCalculateClick(e)}>
-              <input className="input-weight" type="number" value={this.state.inputWeight} onChange={e => this.setWeight(e)} />
-              <button type="submit">Calculate!</button>
-            </form>
-            <div>
-              <p>Available plates:</p>
-              <ul className="available-weights">
-                {this.renderWeightCheckboxes()}
-              </ul>
+            <div className="left">
+              <div className="padding">
+                <p>Enter target weight (lbs):</p>
+                <form onSubmit={e => this.onCalculateClick(e)}>
+                  <input className="input-weight" type="number" value={this.state.inputWeight} onChange={e => this.setWeight(e)} />
+                  <button type="submit">Calculate!</button>
+                </form>
+              </div>
             </div>
+            <div className="right">
+              <div className="padding">
+                <p>Available plates:</p>
+                <ul className="available-weights">
+                  {this.renderWeightCheckboxes()}
+                </ul>
+              </div>
+            </div>
+            <div className="clear"></div>
           </div>
           <div className="weight-results">
             {this.renderWeights()}
