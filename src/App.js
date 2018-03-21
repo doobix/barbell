@@ -3,6 +3,7 @@ import './App.css';
 
 const DEFAULT_WEIGHT = 310;
 const DEFAULT_WEIGHT_MAP = {
+  55: false,
   45: true,
   35: false,
   25: true,
@@ -18,7 +19,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      weights: [45, 35, 25, 10, 5, 2.5],
+      weights: [55, 45, 35, 25, 10, 5, 2.5],
       weightMap: JSON.parse(localStorage.getItem(LAST_WEIGHT_MAP)) || DEFAULT_WEIGHT_MAP,
       barbellWeight: 45,
       inputWeight: localStorage.getItem(LAST_INPUT_WEIGHT) || DEFAULT_WEIGHT,
