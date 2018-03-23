@@ -24,6 +24,7 @@ class App extends Component {
       barbellWeight: 45,
       inputWeight: localStorage.getItem(LAST_INPUT_WEIGHT) || DEFAULT_WEIGHT,
       calculatedWeights: [],
+      calculatedWeight: 0,
       leftoverWeight: 0,
     };
   }
@@ -33,6 +34,9 @@ class App extends Component {
   }
 
   render() {
+    const firstHalfWeights = [...this.state.weights.slice(0, Math.ceil(this.state.weights.length / 2))];
+    const secondHalfWeights = [...this.state.weights.slice(Math.ceil(this.state.weights.length / 2), this.state.weights.length)];
+
     return (
       <div className="App">
         <header className="App-header">
@@ -40,24 +44,23 @@ class App extends Component {
         </header>
         <div className="content">
           <div className="enter-weight">
-            <div className="left">
-              <div className="padding">
-                <p>Enter target weight (lbs):</p>
-                <form onSubmit={e => this.onCalculateClick(e)}>
-                  <input className="input-weight" type="number" value={this.state.inputWeight} onChange={e => this.setWeight(e)} />
-                  <button type="submit">Calculate!</button>
-                </form>
-              </div>
+            <div className="padding">
+              <p>Enter target weight (lbs):</p>
+              <form onSubmit={e => this.onCalculateClick(e)}>
+                <input className="input-weight" type="number" value={this.state.inputWeight} onChange={e => this.setWeight(e)} />
+                <button type="submit">Calculate!</button>
+              </form>
             </div>
-            <div className="right">
-              <div className="padding">
-                <p>Available plates:</p>
-                <ul className="available-weights">
-                  {this.renderWeightCheckboxes()}
-                </ul>
-              </div>
+
+            <div className="padding">
+              <p>Available plates:</p>
+              <ul className="available-weights">
+                {this.renderWeightCheckboxes(firstHalfWeights)}
+              </ul>
+              <ul className="available-weights">
+                {this.renderWeightCheckboxes(secondHalfWeights)}
+              </ul>
             </div>
-            <div className="clear"></div>
           </div>
           <div className="weight-results">
             {this.renderWeights()}
@@ -101,6 +104,7 @@ class App extends Component {
 
     this.setState({
       calculatedWeights,
+      calculatedWeight: this.state.inputWeight - (oneSideWeights * 2),
       leftoverWeight: oneSideWeights * 2,
     });
 
@@ -118,9 +122,9 @@ class App extends Component {
     });
   }
 
-  renderWeightCheckboxes() {
+  renderWeightCheckboxes(weightArray) {
     const weightCheckboxes = [];
-    this.state.weights.forEach((weight) => {
+    weightArray.forEach((weight) => {
       weightCheckboxes.push(
         <li key={weight}>
           <label>
@@ -154,7 +158,7 @@ class App extends Component {
     if (this.state.leftoverWeight) {
       leftoverWeightElement = (
         <div className="notice">
-          Notice: Unable to find weights to add {this.state.leftoverWeight} lbs to the barbell.
+          Notice: No plates available to add {this.state.leftoverWeight} lbs to the barbell.
         </div>
       );
     }
@@ -162,7 +166,7 @@ class App extends Component {
     return (
       <div>
         {leftoverWeightElement}
-        <p>Weights to add to each side of the barbell:</p>
+        <p>Add these weights to each side of the barbell to get {this.state.calculatedWeight} lbs:</p>
         {weightElements}
       </div>
     );
