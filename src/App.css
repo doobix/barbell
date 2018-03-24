@@ -1,3 +1,8 @@
+#root {
+  background-color: rgba(0, 0, 0, 0.39);
+  min-height: 100%;
+}
+
 .App {
   text-align: center;
   color: #FFFFFF;
@@ -15,10 +20,6 @@
 
 .content p {
   margin: 10px 0;
-}
-
-.enter-weight {
-  background-color: rgba(0, 0, 0, 0.39);
 }
 
 .enter-weight button {
@@ -54,7 +55,6 @@
 }
 
 .weight-results {
-  background-color: rgba(0, 0, 0, 0.39);
   padding: 10px 20px;
 }
 
