@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import WeightCheckboxes from './WeightCheckboxes';
+import WeightResults from './WeightResults';
 import './App.css';
 
 const DEFAULT_WEIGHT = 310;
@@ -55,16 +57,26 @@ class App extends Component {
             <div className="padding">
               <p>Available plates:</p>
               <ul className="available-weights">
-                {this.renderWeightCheckboxes(firstHalfWeights)}
+                <WeightCheckboxes
+                  onChange={this.toggleWeightCheckbox.bind(this)}
+                  weightArray={firstHalfWeights}
+                  weightMap={this.state.weightMap}
+                />
               </ul>
               <ul className="available-weights">
-                {this.renderWeightCheckboxes(secondHalfWeights)}
+                <WeightCheckboxes
+                  onChange={this.toggleWeightCheckbox.bind(this)}
+                  weightArray={secondHalfWeights}
+                  weightMap={this.state.weightMap}
+                />
               </ul>
             </div>
           </div>
-          <div className="weight-results">
-            {this.renderWeights()}
-          </div>
+          <WeightResults
+            calculatedWeights={this.state.calculatedWeights}
+            calculatedWeight={this.state.calculatedWeight}
+            leftoverWeight={this.state.leftoverWeight}
+          />
         </div>
       </div>
     );
@@ -120,56 +132,6 @@ class App extends Component {
       localStorage.setItem(LAST_WEIGHT_MAP, JSON.stringify(this.state.weightMap));
       this.calculateWeights();
     });
-  }
-
-  renderWeightCheckboxes(weightArray) {
-    const weightCheckboxes = [];
-    weightArray.forEach((weight) => {
-      weightCheckboxes.push(
-        <li key={weight}>
-          <label>
-            <input
-              type="checkbox"
-              checked={this.state.weightMap[weight]}
-              onChange={() => this.toggleWeightCheckbox(weight)}
-            /> {weight}
-          </label>
-        </li>
-      );
-    });
-    return weightCheckboxes;
-  }
-
-  renderWeights() {
-    if (this.state.calculatedWeights.length === 0) {
-      return (
-        <div className="notice">
-          Notice: Unable to make a barbell with the targeted weight.
-        </div>
-      );
-    }
-
-    let weightElements = [];
-    this.state.calculatedWeights.forEach((weightObj) => {
-      weightElements.push(<div key={weightObj.weight}>{weightObj.count} x {weightObj.weight} lbs</div>);
-    });
-
-    let leftoverWeightElement = null;
-    if (this.state.leftoverWeight) {
-      leftoverWeightElement = (
-        <div className="notice">
-          Notice: No plates available to add {this.state.leftoverWeight} lbs to the barbell.
-        </div>
-      );
-    }
-
-    return (
-      <div>
-        {leftoverWeightElement}
-        <p>Add these weights to each side of the barbell to get {this.state.calculatedWeight} lbs:</p>
-        {weightElements}
-      </div>
-    );
   }
 }
 

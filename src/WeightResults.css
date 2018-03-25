@@ -1,0 +1,11 @@
+.weight-results {
+  padding: 10px 20px;
+}
+
+.notice {
+  background-color: rgba(255, 255, 136, 0.76);
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  color: #000000;
+}
