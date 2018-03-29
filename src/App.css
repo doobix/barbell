@@ -36,11 +36,6 @@
   text-align: center;
 }
 
-.enter-weight input[type="checkbox"] {
-  transform: scale(1.25);
-  cursor: pointer;
-}
-
 .enter-weight label {
   padding: 5px;
   cursor: pointer;

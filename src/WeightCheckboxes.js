@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import './WeightCheckboxes.css';
+import './WeightCheckboxes.css';
 
 class WeightCheckboxes extends Component {
   render() {
@@ -13,6 +13,7 @@ class WeightCheckboxes extends Component {
         <li key={weight}>
           <label>
             <input
+              className="weight-checkbox"
               type="checkbox"
               checked={this.props.weightMap[weight]}
               onChange={() => this.props.onChange(weight)}
