@@ -49,7 +49,7 @@ class App extends Component {
             <div className="padding">
               <p>Enter target weight (lbs):</p>
               <form onSubmit={e => this.onCalculateClick(e)}>
-                <input className="input-weight" type="number" value={this.state.inputWeight} onChange={e => this.setWeight(e)} />
+                <input className="input-weight" type="number" pattern="\d*" value={this.state.inputWeight} onChange={e => this.setWeight(e)} />
                 <button type="submit">Calculate!</button>
               </form>
             </div>
