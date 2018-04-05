@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import './WeightResults.css';
 
+export const NO_WEIGHT_MESSAGE = 'Notice: Unable to make a barbell with the targeted weight.';
+export const LEFTOVER_WEIGHT_MESSAGE = 'Notice: No plates available to add {leftoverWeight} lbs to the barbell.';
+export const ADD_WEIGHT_MESSAGE = 'Add these weights to each side of the barbell to get {calculatedWeight} lbs:'
+
 class WeightResults extends Component {
   render() {
      if (this.props.calculatedWeights.length === 0) {
       return (
         <div className="notice">
-          Notice: Unable to make a barbell with the targeted weight.
+          {NO_WEIGHT_MESSAGE}
         </div>
       );
     }
@@ -20,7 +24,7 @@ class WeightResults extends Component {
     if (this.props.leftoverWeight) {
       leftoverWeightElement = (
         <div className="notice">
-          Notice: No plates available to add {this.props.leftoverWeight} lbs to the barbell.
+          {LEFTOVER_WEIGHT_MESSAGE.replace('{leftoverWeight}', this.props.leftoverWeight)}
         </div>
       );
     }
@@ -28,7 +32,7 @@ class WeightResults extends Component {
     return (
       <div className="weight-results">
         {leftoverWeightElement}
-        <p>Add these weights to each side of the barbell to get {this.props.calculatedWeight} lbs:</p>
+        <p>{ADD_WEIGHT_MESSAGE.replace('{calculatedWeight}', this.props.calculatedWeight)}</p>
         {weightElements}
       </div>
     );
