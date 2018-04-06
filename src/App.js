@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import GitHubButton from './GitHubButton';
 import WeightCheckboxes from './WeightCheckboxes';
 import WeightResults from './WeightResults';
 import './App.css';
@@ -78,6 +79,9 @@ class App extends Component {
             leftoverWeight={this.state.leftoverWeight}
           />
         </div>
+        <footer>
+          <GitHubButton />
+        </footer>
       </div>
     );
   }
