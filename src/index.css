@@ -1,4 +1,4 @@
-html, body {
+html {
   height: 100%;
 }
 
@@ -10,4 +10,5 @@ body {
   background-attachment: fixed;
   background-position: 80% 50%;
   background-size: cover;
+  height: 100vh;
 }

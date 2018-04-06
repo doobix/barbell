@@ -45,7 +45,7 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Barbell Weight Calculator</h1>
         </header>
-        <div className="content">
+        <div className="App-content">
           <div className="enter-weight">
             <div className="padding">
               <p>Enter target weight (lbs):</p>
@@ -79,7 +79,7 @@ class App extends Component {
             leftoverWeight={this.state.leftoverWeight}
           />
         </div>
-        <footer>
+        <footer className="App-footer">
           <GitHubButton />
         </footer>
       </div>
